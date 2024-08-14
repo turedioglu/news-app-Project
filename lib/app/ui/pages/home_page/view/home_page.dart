@@ -16,147 +16,150 @@ class HomePage extends ConsumerWidget {
     final newsState = ref.watch(newsProvider);
     final newsNotifier = ref.read(newsProvider.notifier);
 
-    return Scaffold(
-      appBar: AppBar(
-        leading: const SizedBox(),
-        surfaceTintColor: ColorManager.instance.white,
-        title: Text(
-          ApplicationConstants.instance.appName,
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(8.0.w),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 10,
-                  child: FTextFormField.widget(
-                    controller: newsNotifier.searchController,
-                    textInputAction: TextInputAction.search,
-                    onFieldSubmitted: (val) {
-                      if (val.isNotEmpty) {
-                        newsNotifier.search(val);
-                      }
-                    },
-                    leadingIcon: const Icon(
-                      Icons.search,
-                    ),
-                    labelText: "Arama Yap",
-                    context: context,
-                  ),
-                ),
-                Expanded(
-                    flex: 2,
-                    child: InkWell(
-                      onTap: () {
-                        if (newsNotifier.searchController.text.isNotEmpty) {
-                          newsNotifier.search(newsNotifier.searchController.text);
-                        }
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 8.w),
-                        child: Container(
-                          height: 49.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: ColorManager.instance.cupertinoSlidingSegmentedControlActive,
-                          ),
-                          child: Center(
-                              child: Icon(
-                            Icons.search,
-                            color: ColorManager.instance.white,
-                          )),
-                        ),
-                      ),
-                    )),
-              ],
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: const SizedBox(),
+          surfaceTintColor: ColorManager.instance.white,
+          title: Text(
+            ApplicationConstants.instance.appName,
+            style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w500,
             ),
           ),
-          Expanded(
-            child: newsState.when(
-              data: (news) {
-                if (news?.articles == null || news?.articles?.isEmpty == true) {
-                  return Center(
-                    child: Text(
-                      "Haberleri görmek için arama yapın.",
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w500,
-                        color: ColorManager.instance.black,
+        ),
+        body: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(8.0.w),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 10,
+                    child: FTextFormField.widget(
+                      controller: newsNotifier.searchController,
+                      textInputAction: TextInputAction.search,
+                      onFieldSubmitted: (val) {
+                        if (val.isNotEmpty) {
+                          newsNotifier.search(val);
+                        }
+                      },
+                      leadingIcon: const Icon(
+                        Icons.search,
                       ),
+                      labelText: "Arama Yap",
+                      context: context,
                     ),
-                  );
-                }
-
-                return ListView.builder(
-                  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                  controller: newsNotifier.scrollController,
-                  itemCount: news?.articles?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    final article = news?.articles?[index];
-                    return Padding(
-                      padding: EdgeInsets.all(8.w),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: ColorManager.instance.cupertinoSlidingSegmentedControlActive,
+                  ),
+                  Expanded(
+                      flex: 2,
+                      child: InkWell(
+                        onTap: () {
+                          if (newsNotifier.searchController.text.isNotEmpty) {
+                            newsNotifier.search(newsNotifier.searchController.text);
+                          }
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 8.w),
+                          child: Container(
+                            height: 49.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: ColorManager.instance.cupertinoSlidingSegmentedControlActive,
+                            ),
+                            child: Center(
+                                child: Icon(
+                              Icons.search,
+                              color: ColorManager.instance.white,
+                            )),
                           ),
                         ),
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return NewsDetailPage(
-                                    newsDetail: news?.articles?[index],
-                                  );
-                                },
-                              ),
-                            );
-                          },
-                          child: ListTile(
-                            title: Text(
-                              article?.title ?? "",
-                              style: TextStyle(
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.w600,
-                                color: ColorManager.instance.black,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            subtitle: Text(
-                              article?.description ?? "",
-                              style: TextStyle(
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w500,
-                                color: ColorManager.instance.secondary,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
+                      )),
+                ],
+              ),
+            ),
+            Expanded(
+              child: newsState.when(
+                data: (news) {
+                  if (news?.articles == null || news?.articles?.isEmpty == true) {
+                    return Center(
+                      child: Text(
+                        "Haberleri görmek için arama yapın.",
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w500,
+                          color: ColorManager.instance.black,
                         ),
                       ),
                     );
-                  },
-                );
-              },
-              loading: () => const LoadingOverlayWidget(),
-              error: (err, stack) => Center(
-                child: Text("Hata: $err"),
+                  }
+      
+                  return ListView.builder(
+                    keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                    controller: newsNotifier.scrollController,
+                    itemCount: news?.articles?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      final article = news?.articles?[index];
+                      return Padding(
+                        padding: EdgeInsets.all(8.w),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: ColorManager.instance.cupertinoSlidingSegmentedControlActive,
+                            ),
+                          ),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return NewsDetailPage(
+                                      newsDetail: news?.articles?[index],
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                            child: ListTile(
+                              title: Text(
+                                article?.title ?? "",
+                                style: TextStyle(
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: ColorManager.instance.black,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              subtitle: Text(
+                                article?.description ?? "",
+                                style: TextStyle(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: ColorManager.instance.secondary,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+                loading: () => const LoadingOverlayWidget(),
+                error: (err, stack) => Center(
+                  child: Text("Hata: $err"),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
