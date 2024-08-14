@@ -18,6 +18,7 @@ class HomePage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: const SizedBox(),
         surfaceTintColor: ColorManager.instance.white,
         title: Text(
           ApplicationConstants.instance.appName,
