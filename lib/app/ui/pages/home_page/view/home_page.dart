@@ -1,6 +1,6 @@
 import 'package:feature_mind_case/app/ui/global_widgets/loading_widget.dart';
 import 'package:feature_mind_case/app/providers/news_provider.dart';
-import 'package:feature_mind_case/app/ui/pages/news_detail_page/news_detail_page.dart';
+import 'package:feature_mind_case/app/ui/pages/news_detail_page/view/news_detail_page.dart';
 import 'package:feature_mind_case/app/utils/f_textformfield.dart';
 import 'package:feature_mind_case/core/constants/app_constants.dart';
 import 'package:feature_mind_case/core/init/color/color_manager.dart';

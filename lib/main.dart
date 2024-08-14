@@ -1,5 +1,5 @@
 import 'package:feature_mind_case/app/data/routes/route_manager.dart';
-import 'package:feature_mind_case/app/ui/pages/error_route_page/error_route_page.dart';
+import 'package:feature_mind_case/app/ui/pages/error_route_page/view/error_route_page.dart';
 import 'package:feature_mind_case/app/ui/pages/home_page/view/home_page.dart';
 import 'package:feature_mind_case/app/ui/theme/app_theme_dark.dart';
 import 'package:feature_mind_case/app/ui/theme/app_theme_light.dart';
