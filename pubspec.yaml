@@ -26,7 +26,6 @@ dependencies:
   flutter_dotenv: ^5.1.0
   flutter_screenutil: ^5.9.0
   auto_size_text: ^3.0.0
-  flutter_overlay_loader: ^2.0.0
   cached_network_image: ^3.4.1
 
   talker_dio_logger: any
