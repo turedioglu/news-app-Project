@@ -1,0 +1,67 @@
+name: feature_mind_case
+description: "Feature/Mind Flutter Case Project"
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  #state management
+  flutter_riverpod: ^2.5.1
+
+  #network
+  dio: ^5.3.3
+
+  #utils
+  get_secure_storage: ^1.0.5
+  flutter_dotenv: ^5.1.0
+  flutter_screenutil: ^5.9.0
+  auto_size_text: ^3.0.0
+  flutter_overlay_loader: ^2.0.0
+  cached_network_image: ^3.4.1
+
+  talker_dio_logger: any
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+ 
+  flutter_lints: ^4.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/fonts/
+    - .env
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Poppins-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Poppins-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Poppins-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Poppins-Black.ttf
+          weight: 900
